@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as Cheerio from "cheerio";
 import { generateSummary } from "../services/openaiServices.js";
+import Card from "../models/card.js";
 
 export const generatedCard = async (req, res) => {
   const { sourceType, content } = req.body;
@@ -42,5 +43,16 @@ export const generatedCard = async (req, res) => {
     )
   ).slice(0, 3);
 
-  return res.status(200).json({ summary, tags });
+  try {
+    const card = await Card.create({
+      summary,
+      tags,
+      originalText: inputText,
+      userId: req.user.id,
+    });
+
+    return res.status(201).json({ message: "Card saved", card });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to save card" });
+  }
 };

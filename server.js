@@ -7,6 +7,8 @@ import logger from "./utils/logger.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import cardRoutes from "./routes/cardRoutes.js";
+import "./models/card.js";
+import "./models/user.js"
 
 dotenv.config();
 
