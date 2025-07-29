@@ -49,3 +49,9 @@ export const login = async(req, res)=>{
         return res.status(500).json({error:"Login failed"});
     }
 }
+
+// {
+//     "name":"universe",
+//     "email":"uni@email.com",
+//     "password":"12345678"
+// }
